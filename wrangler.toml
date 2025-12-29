@@ -1,0 +1,8 @@
+name = "recipe-backstory-proxy"
+main = "src/index.ts"
+compatibility_date = "2024-12-18"
+compatibility_flags = ["nodejs_compat"]
+
+routes = [
+  { pattern = "recipes.aok.site/*", zone_name = "aok.site" }
+]
