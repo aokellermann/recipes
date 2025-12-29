@@ -209,7 +209,8 @@ const LANDING_PAGE = `<!DOCTYPE html>
 </body>
 </html>`;
 
-const BANNER_HTML = `
+function getBannerHtml(proxyOrigin: string): string {
+  return `
 <div id="backstory-banner" style="
   position: fixed;
   top: 0;
@@ -226,10 +227,11 @@ const BANNER_HTML = `
 ">
   <strong>Recipe Backstory Proxy</strong> &mdash;
   The recipe has been removed for your reading pleasure. Enjoy the story!
-  <a href="/" style="color: #ffd700; margin-left: 10px;">Try another</a>
+  <a href="${proxyOrigin}/" style="color: #ffd700; margin-left: 10px;">Try another</a>
 </div>
 <div style="height: 50px;"></div>
 `;
+}
 
 class RecipeRemover {
   element(element: Element) {
@@ -316,8 +318,14 @@ class LinkRewriter {
 }
 
 class BannerInjector {
+  private proxyOrigin: string;
+
+  constructor(proxyOrigin: string) {
+    this.proxyOrigin = proxyOrigin;
+  }
+
   element(element: Element) {
-    element.prepend(BANNER_HTML, { html: true });
+    element.prepend(getBannerHtml(this.proxyOrigin), { html: true });
   }
 }
 
@@ -410,7 +418,7 @@ export default {
     rewriter = rewriter.on('head', new BaseTagInjector(parsedTarget.toString()));
 
     // Inject our banner
-    rewriter = rewriter.on('body', new BannerInjector());
+    rewriter = rewriter.on('body', new BannerInjector(proxyOrigin));
 
     // Transform and return
     const transformedResponse = rewriter.transform(response);
