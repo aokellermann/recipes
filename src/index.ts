@@ -116,7 +116,7 @@ const LANDING_PAGE = `<!DOCTYPE html>
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Recipe Backstory Proxy</title>
+  <title>The Scenic Route</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
@@ -181,7 +181,7 @@ const LANDING_PAGE = `<!DOCTYPE html>
   </style>
 </head>
 <body>
-  <h1>Recipe Backstory Proxy</h1>
+  <h1>The Scenic Route</h1>
   <p class="subtitle">Finally, a way to enjoy recipe blogs the way they were meant to be read.</p>
 
   <div class="story">
@@ -225,7 +225,7 @@ function getBannerHtml(proxyOrigin: string): string {
   z-index: 999999;
   box-shadow: 0 2px 10px rgba(0,0,0,0.3);
 ">
-  <strong>Recipe Backstory Proxy</strong> &mdash;
+  <strong>The Scenic Route</strong> &mdash;
   The recipe has been removed for your reading pleasure. Enjoy the story!
   <a href="${proxyOrigin}/" style="color: #ffd700; margin-left: 10px;">Try another</a>
 </div>

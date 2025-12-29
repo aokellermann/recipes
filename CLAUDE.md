@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Recipe Backstory Proxy - A humorous Cloudflare Worker that proxies recipe websites and strips out the actual recipe, leaving only the lengthy backstories and life stories.
+The Scenic Route - A humorous Cloudflare Worker that proxies recipe websites and strips out the actual recipe, leaving only the lengthy backstories and life stories. Take the long way!
 
 ## Commands
 

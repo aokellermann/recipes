@@ -20,7 +20,7 @@ const RECIPE_SITES = {
   },
 };
 
-describe('Recipe Backstory Proxy', () => {
+describe('The Scenic Route', () => {
   let serverProcess: Subprocess;
 
   beforeAll(async () => {
@@ -49,7 +49,7 @@ describe('Recipe Backstory Proxy', () => {
       const resp = await fetch(BASE_URL);
       expect(resp.status).toBe(200);
       const text = await resp.text();
-      expect(text).toContain('Recipe Backstory Proxy');
+      expect(text).toContain('The Scenic Route');
       expect(text).toContain('proxy-form');
     });
   });

@@ -1,7 +1,7 @@
 {
-  "name": "recipe-backstory-proxy",
+  "name": "the-scenic-route",
   "version": "1.0.0",
-  "description": "A Cloudflare Worker that strips recipes and keeps only the backstories",
+  "description": "Take the long way through recipe blogs - strips recipes, keeps the stories",
   "type": "module",
   "scripts": {
     "dev": "wrangler dev",
