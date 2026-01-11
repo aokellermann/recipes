@@ -187,14 +187,15 @@ const LANDING_PAGE = `<!DOCTYPE html>
 
   <form id="proxy-form">
     <label for="url">Enter a recipe URL:</label>
-    <input type="url" id="url" name="url" placeholder="https://example.com/grandmas-famous-cookies" required>
+    <input type="url" id="url" name="url" placeholder="https://ohmyveggies.com/easy-vegan-potato-curry/">
     <button type="submit">Read the Backstory</button>
   </form>
 
   <script>
     document.getElementById('proxy-form').addEventListener('submit', (e) => {
       e.preventDefault();
-      const url = document.getElementById('url').value;
+      const input = document.getElementById('url');
+      const url = input.value || input.placeholder;
       window.location.href = '/' + url;
     });
   </script>
