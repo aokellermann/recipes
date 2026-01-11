@@ -7,7 +7,7 @@ A Cloudflare Worker that proxies recipe websites and strips out the actual recip
 Visit [recipes.aok.site](https://recipes.aok.site) and enter a recipe URL, or navigate directly:
 
 ```
-https://recipes.aok.site/https://example.com/chocolate-chip-cookies
+https://recipes.aok.site/https://ohmyveggies.com/easy-vegan-potato-curry/
 ```
 
 ## Development
