@@ -172,6 +172,13 @@ const LANDING_PAGE = `<!DOCTYPE html>
       cursor: pointer;
     }
     button:hover { background: #a0522d; }
+    footer {
+      margin-top: 3rem;
+      text-align: center;
+      color: #888;
+      font-size: 0.9rem;
+    }
+    footer a { color: #8b4513; }
   </style>
 </head>
 <body>
@@ -190,6 +197,10 @@ const LANDING_PAGE = `<!DOCTYPE html>
     <input type="url" id="url" name="url" placeholder="https://ohmyveggies.com/easy-vegan-potato-curry/">
     <button type="submit">Read the Backstory</button>
   </form>
+
+  <footer>
+    <a href="https://github.com/aokellermann/recipes">GitHub</a>
+  </footer>
 
   <script>
     document.getElementById('proxy-form').addEventListener('submit', (e) => {
