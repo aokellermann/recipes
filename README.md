@@ -4,10 +4,10 @@ A Cloudflare Worker that proxies recipe websites and strips out the actual recip
 
 ## Usage
 
-Visit [thescenicroute.com](https://thescenicroute.com) and enter a recipe URL, or navigate directly:
+Visit [recipes.aok.site](https://recipes.aok.site) and enter a recipe URL, or navigate directly:
 
 ```
-https://thescenicroute.com/https://example.com/chocolate-chip-cookies
+https://recipes.aok.site/https://example.com/chocolate-chip-cookies
 ```
 
 ## Development
