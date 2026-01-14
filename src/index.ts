@@ -117,90 +117,288 @@ const LANDING_PAGE = `<!DOCTYPE html>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>The Scenic Route</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23a67c52' stroke-width='1.5'%3E%3Cpath d='M12 2C13.5 4 15 6 15 9c0 3-2 5-3 6.5C11 14 9 12 9 9c0-3 1.5-5 3-7z'/%3E%3Cpath d='M12 22v-6.5'/%3E%3Cpath d='M9 18c-2 0-4-1-4-3s2-3 4-3'/%3E%3Cpath d='M15 18c2 0 4-1 4-3s-2-3-4-3'/%3E%3C/svg%3E">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
+
     body {
-      font-family: Georgia, 'Times New Roman', serif;
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 2rem;
+      font-family: 'Lora', Georgia, serif;
       line-height: 1.8;
-      background: #faf9f7;
-      color: #333;
+      color: #2d2a26;
+      min-height: 100vh;
+      background:
+        radial-gradient(ellipse at top left, rgba(255, 248, 240, 0.8) 0%, transparent 50%),
+        radial-gradient(ellipse at bottom right, rgba(255, 235, 210, 0.6) 0%, transparent 50%),
+        linear-gradient(180deg, #fdf8f3 0%, #f5ebe0 100%);
     }
+
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 1.5rem 1.5rem;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 1.5rem;
+      position: relative;
+    }
+
+    .decorative-line {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 0.75rem;
+      color: #c4a574;
+    }
+
+    .decorative-line::before,
+    .decorative-line::after {
+      content: '';
+      height: 1px;
+      width: 60px;
+      background: linear-gradient(90deg, transparent, #c4a574, transparent);
+    }
+
+    .decorative-line svg {
+      width: 24px;
+      height: 24px;
+    }
+
     h1 {
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
-      color: #8b4513;
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(2rem, 6vw, 2.5rem);
+      font-weight: 600;
+      color: #5d4e37;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.02em;
     }
+
     .subtitle {
       font-style: italic;
-      color: #666;
-      margin-bottom: 2rem;
-      font-size: 1.2rem;
+      color: #7a6f63;
+      font-size: 1rem;
+      max-width: 28em;
+      margin: 0 auto;
     }
+
     .story {
       background: white;
-      padding: 2rem;
-      border-radius: 8px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-      margin-bottom: 2rem;
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow:
+        0 4px 6px -1px rgba(0, 0, 0, 0.05),
+        0 10px 20px -5px rgba(93, 78, 55, 0.1);
+      margin-bottom: 1rem;
+      position: relative;
+      overflow: hidden;
     }
-    .story p { margin-bottom: 1rem; }
+
+    .story::before {
+      content: '"';
+      position: absolute;
+      top: -15px;
+      left: 10px;
+      font-family: 'Playfair Display', serif;
+      font-size: 5rem;
+      color: #f5ebe0;
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    .story p {
+      margin-bottom: 0.75rem;
+      position: relative;
+      z-index: 1;
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+
+    .story p:last-child {
+      margin-bottom: 0;
+    }
+
+    .story strong {
+      color: #a67c52;
+      font-weight: 500;
+    }
+
+    .dropcap::first-letter {
+      float: left;
+      font-family: 'Playfair Display', serif;
+      font-size: 2.75rem;
+      line-height: 0.85;
+      padding-right: 0.4rem;
+      color: #a67c52;
+      font-weight: 600;
+    }
+
     form {
       background: white;
-      padding: 2rem;
-      border-radius: 8px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      padding: 1.25rem;
+      border-radius: 12px;
+      box-shadow:
+        0 4px 6px -1px rgba(0, 0, 0, 0.05),
+        0 10px 20px -5px rgba(93, 78, 55, 0.1);
     }
-    label { display: block; margin-bottom: 0.5rem; font-weight: bold; }
-    input[type="url"] {
-      width: 100%;
-      padding: 0.75rem;
-      font-size: 1rem;
-      border: 2px solid #ddd;
-      border-radius: 4px;
-      margin-bottom: 1rem;
-    }
-    button {
-      background: #8b4513;
-      color: white;
-      border: none;
-      padding: 0.75rem 2rem;
-      font-size: 1rem;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-    button:hover { background: #a0522d; }
-    footer {
-      margin-top: 3rem;
-      text-align: center;
-      color: #888;
+
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      color: #5d4e37;
       font-size: 0.9rem;
     }
-    footer a { color: #8b4513; }
+
+    .input-wrapper {
+      position: relative;
+      margin-bottom: 0.75rem;
+    }
+
+    input[type="url"] {
+      width: 100%;
+      padding: 0.75rem 0.75rem 0.75rem 2.5rem;
+      font-size: 0.9rem;
+      font-family: 'Lora', Georgia, serif;
+      border: 2px solid #e8e0d5;
+      border-radius: 8px;
+      background: #fdfcfa;
+      color: #2d2a26;
+      transition: all 0.2s ease;
+    }
+
+    input[type="url"]::placeholder {
+      color: #b5a99a;
+    }
+
+    input[type="url"]:focus {
+      outline: none;
+      border-color: #c4a574;
+      background: white;
+      box-shadow: 0 0 0 3px rgba(196, 165, 116, 0.15);
+    }
+
+    .input-icon {
+      position: absolute;
+      left: 0.75rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #b5a99a;
+      pointer-events: none;
+    }
+
+    .input-icon svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    button {
+      width: 100%;
+      background: linear-gradient(135deg, #a67c52 0%, #8b6542 100%);
+      color: white;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      font-size: 0.95rem;
+      font-family: 'Lora', Georgia, serif;
+      font-weight: 500;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 12px rgba(139, 101, 66, 0.25);
+    }
+
+    button:hover {
+      background: linear-gradient(135deg, #b88c62 0%, #9b7552 100%);
+      box-shadow: 0 6px 16px rgba(139, 101, 66, 0.35);
+      transform: translateY(-1px);
+    }
+
+    button:active {
+      transform: translateY(0);
+    }
+
+    footer {
+      margin-top: 1.25rem;
+      text-align: center;
+      color: #9a8f83;
+      font-size: 0.85rem;
+    }
+
+    footer a {
+      color: #a67c52;
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.2s ease;
+    }
+
+    footer a:hover {
+      border-bottom-color: #a67c52;
+    }
+
+    @media (max-width: 600px) {
+      .container { padding: 0.75rem; }
+      header { margin-bottom: 1rem; }
+      .decorative-line { margin-bottom: 0.5rem; }
+      .decorative-line svg { width: 20px; height: 20px; }
+      h1 { font-size: 1.75rem; margin-bottom: 0.25rem; }
+      .subtitle { font-size: 0.9rem; }
+      .story { padding: 1rem; margin-bottom: 0.75rem; }
+      .story::before { font-size: 3.5rem; top: -8px; left: 5px; }
+      .story p { font-size: 0.875rem; margin-bottom: 0.5rem; line-height: 1.6; }
+      .dropcap::first-letter { font-size: 2.25rem; }
+      form { padding: 0.875rem; }
+      label { font-size: 0.85rem; margin-bottom: 0.375rem; }
+      .input-wrapper { margin-bottom: 0.5rem; }
+      input[type="url"] { padding: 0.625rem 0.625rem 0.625rem 2.25rem; font-size: 0.85rem; }
+      button { padding: 0.625rem 1rem; font-size: 0.9rem; }
+      footer { margin-top: 0.75rem; font-size: 0.8rem; }
+    }
   </style>
 </head>
 <body>
-  <h1>The Scenic Route</h1>
-  <p class="subtitle">Finally, a way to enjoy recipe blogs the way they were meant to be read.</p>
+  <div class="container">
+    <header>
+      <div class="decorative-line">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M12 2C13.5 4 15 6 15 9c0 3-2 5-3 6.5C11 14 9 12 9 9c0-3 1.5-5 3-7z"/>
+          <path d="M12 22v-6.5"/>
+          <path d="M9 18c-2 0-4-1-4-3s2-3 4-3"/>
+          <path d="M15 18c2 0 4-1 4-3s-2-3-4-3"/>
+        </svg>
+      </div>
+      <h1>The Scenic Route</h1>
+      <p class="subtitle">Finally, a way to enjoy recipe blogs the way they were meant to be read.</p>
+    </header>
 
-  <div class="story">
-    <p>You know what I love about recipe blogs? The recipes? Absolutely not.</p>
-    <p>I'm here for the journey. The deeply personal anecdotes about how this particular arrangement of flour and sugar reminds the author of that summer in Tuscany when they discovered themselves while studying abroad.</p>
-    <p>I want to know about their grandmother's kitchen. Their child's first steps. Their husband's initially skeptical but ultimately supportive reaction to yet another kitchen experiment.</p>
-    <p>This proxy strips away all that pesky recipe information so you can focus on what really matters: <strong>the story</strong>.</p>
+    <div class="story">
+      <p class="dropcap">You know what I love about recipe blogs? The recipes? Absolutely not.</p>
+      <p>I'm here for the journey. The deeply personal anecdotes about how this particular arrangement of flour and sugar reminds the author of that summer in Tuscany when they discovered themselves while studying abroad.</p>
+      <p>I want to know about their grandmother's kitchen. Their child's first steps. Their husband's initially skeptical but ultimately supportive reaction to yet another kitchen experiment.</p>
+      <p>This proxy strips away all that pesky recipe information so you can focus on what really matters: <strong>the story</strong>.</p>
+    </div>
+
+    <form id="proxy-form">
+      <label for="url">Paste a recipe URL to begin your journey</label>
+      <div class="input-wrapper">
+        <span class="input-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+            <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/>
+            <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+          </svg>
+        </span>
+        <input type="url" id="url" name="url" placeholder="https://ohmyveggies.com/easy-vegan-potato-curry/">
+      </div>
+      <button type="submit">Read the Backstory</button>
+    </form>
+
+    <footer>
+      <a href="https://github.com/aokellermann/recipes">GitHub</a>
+    </footer>
   </div>
-
-  <form id="proxy-form">
-    <label for="url">Enter a recipe URL:</label>
-    <input type="url" id="url" name="url" placeholder="https://ohmyveggies.com/easy-vegan-potato-curry/">
-    <button type="submit">Read the Backstory</button>
-  </form>
-
-  <footer>
-    <a href="https://github.com/aokellermann/recipes">GitHub</a>
-  </footer>
 
   <script>
     document.getElementById('proxy-form').addEventListener('submit', (e) => {
@@ -215,25 +413,47 @@ const LANDING_PAGE = `<!DOCTYPE html>
 
 function getBannerHtml(proxyOrigin: string): string {
   return `
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Lora&display=swap" rel="stylesheet">
 <div id="backstory-banner" style="
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  background: linear-gradient(135deg, #8b4513, #a0522d);
-  color: white;
-  padding: 12px 20px;
-  font-family: Georgia, serif;
+  background: linear-gradient(135deg, #5d4e37 0%, #3d3228 100%);
+  color: #f5ebe0;
+  padding: 14px 24px;
+  font-family: 'Lora', Georgia, serif;
   font-size: 14px;
   text-align: center;
   z-index: 999999;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
 ">
-  <strong>The Scenic Route</strong> &mdash;
-  The recipe has been removed for your reading pleasure. Enjoy the story!
-  <a href="${proxyOrigin}/" style="color: #ffd700; margin-left: 10px;">Try another</a>
+  <span style="display: inline-flex; align-items: center; gap: 8px;">
+    <svg viewBox="0 0 24 24" fill="none" stroke="#c4a574" stroke-width="1.5" style="width: 20px; height: 20px;">
+      <path d="M12 2C13.5 4 15 6 15 9c0 3-2 5-3 6.5C11 14 9 12 9 9c0-3 1.5-5 3-7z"/>
+      <path d="M12 22v-6.5"/>
+      <path d="M9 18c-2 0-4-1-4-3s2-3 4-3"/>
+      <path d="M15 18c2 0 4-1 4-3s-2-3-4-3"/>
+    </svg>
+    <strong style="font-family: 'Playfair Display', Georgia, serif; font-weight: 600; color: #fff;">The Scenic Route</strong>
+  </span>
+  <span style="color: #d4c9bc;">Recipe removed. Enjoy the story!</span>
+  <a href="${proxyOrigin}/" style="
+    color: #c4a574;
+    text-decoration: none;
+    padding: 6px 14px;
+    border: 1px solid rgba(196, 165, 116, 0.4);
+    border-radius: 6px;
+    font-size: 13px;
+    transition: all 0.2s;
+  " onmouseover="this.style.background='rgba(196,165,116,0.15)';this.style.borderColor='#c4a574'" onmouseout="this.style.background='transparent';this.style.borderColor='rgba(196,165,116,0.4)'">Try another</a>
 </div>
-<div style="height: 50px;"></div>
+<div style="height: 56px;"></div>
 `;
 }
 
