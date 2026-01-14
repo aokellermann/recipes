@@ -74,7 +74,7 @@ describe('The Scenic Route', () => {
       expect(resp.status).toBe(200);
       const text = await resp.text();
       expect(text).toContain('backstory-banner');
-      expect(text).toContain('Recipe removed. Enjoy the story!');
+      expect(text).toContain('Enjoy the story!');
     });
 
     test('injects base tag for relative URLs', async () => {

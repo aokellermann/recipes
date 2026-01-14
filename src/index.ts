@@ -442,7 +442,7 @@ function getBannerHtml(proxyOrigin: string): string {
     </svg>
     <strong style="font-family: 'Playfair Display', Georgia, serif; font-weight: 600; color: #fff;">The Scenic Route</strong>
   </span>
-  <span style="color: #d4c9bc;">Recipe removed. Enjoy the story!</span>
+  <span style="color: #d4c9bc;">Enjoy the story!</span>
   <a href="${proxyOrigin}/" style="
     color: #c4a574;
     text-decoration: none;
@@ -509,10 +509,12 @@ class JsonLdScriptHandler {
 class LinkRewriter {
   private proxyOrigin: string;
   private targetOrigin: string;
+  private targetUrl: string;
 
-  constructor(proxyOrigin: string, targetOrigin: string) {
+  constructor(proxyOrigin: string, targetOrigin: string, targetUrl: string) {
     this.proxyOrigin = proxyOrigin;
     this.targetOrigin = targetOrigin;
+    this.targetUrl = targetUrl;
   }
 
   element(element: Element) {
@@ -520,8 +522,13 @@ class LinkRewriter {
     if (!href) return;
 
     try {
+      // Handle fragment-only links (e.g., #recipe) - these need full proxy URL
+      // because the <base> tag would otherwise resolve them to the original domain
+      if (href.startsWith('#')) {
+        element.setAttribute('href', `${this.proxyOrigin}/${this.targetUrl}${href}`);
+      }
       // Handle relative URLs
-      if (href.startsWith('/') && !href.startsWith('//')) {
+      else if (href.startsWith('/') && !href.startsWith('//')) {
         element.setAttribute('href', `${this.proxyOrigin}/${this.targetOrigin}${href}`);
       }
       // Handle absolute URLs to the same origin
@@ -569,7 +576,13 @@ class BaseTagInjector {
 export default {
   async fetch(request: Request): Promise<Response> {
     const url = new URL(request.url);
-    const proxyOrigin = url.origin;
+
+    // Determine proxy origin - detect local dev via CF-Connecting-IP
+    // Wrangler dev rewrites request.url and Host header to match route config,
+    // but CF-Connecting-IP will be localhost (::1 or 127.0.0.1) in dev
+    const cfConnectingIp = request.headers.get('CF-Connecting-IP');
+    const isLocalDev = cfConnectingIp === '::1' || cfConnectingIp === '127.0.0.1';
+    const proxyOrigin = isLocalDev ? 'http://localhost:8787' : url.origin;
 
     // Landing page
     if (url.pathname === '/' || url.pathname === '') {
@@ -636,7 +649,7 @@ export default {
     rewriter = rewriter.on('script[type="application/ld+json"]', new JsonLdScriptHandler());
 
     // Rewrite links to stay within proxy
-    rewriter = rewriter.on('a[href]', new LinkRewriter(proxyOrigin, targetOrigin));
+    rewriter = rewriter.on('a[href]', new LinkRewriter(proxyOrigin, targetOrigin, parsedTarget.toString()));
 
     // Inject base tag to fix relative URLs for CSS/JS/images
     rewriter = rewriter.on('head', new BaseTagInjector(parsedTarget.toString()));
